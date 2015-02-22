@@ -1,9 +1,11 @@
+require 'api_constraints'
+
 Rails.application.routes.draw do
   # Api definition
   namespace :api , defaults: { format: :json },
             constraints: { subdomain: 'api' }, path: '/'  do
-            # generate a base_ui under a subdomain
-    # I'll access the api at api.market_place_api.dev (using pow)
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
 
+    end
   end
 end
