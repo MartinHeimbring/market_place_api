@@ -47,5 +47,15 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
-  config.include Request::JsonHelpers, :type => :controller
+
+  # include the new module inside spec/support as a controller type helper!
+  config.include Request::JsonHelpers, type: :controller
+
+  # include that other module inside support
+  config.include Request::HeadersHelpers, type: :controller
+
+  # add the before hook on Rspec.configure block
+  config.before(:each, type: :controller) do
+    include_default_accept_headers
+  end
 end
