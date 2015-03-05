@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-class Authentication
+class Authentication < ActionController::Base
   include Authenticable
 end
 
