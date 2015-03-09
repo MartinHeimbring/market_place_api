@@ -8,7 +8,7 @@ describe Api::V1::ProductsController do
     end
 
     it "returns the information about a repoter on a hash" do
-      product_response = json_response
+      product_response = json_response[:product]
       expect(product_response[:title]).to eq @product.title
     end
 
@@ -39,7 +39,7 @@ describe Api::V1::ProductsController do
       end
 
       it "renders the json representation for the product record just created" do
-        product_response = json_response
+        product_response = json_response[:product]
         expect(product_response[:title]).to eq @product_attributes[:title]
       end
 
@@ -82,7 +82,7 @@ describe Api::V1::ProductsController do
       end
 
       it "renders the json representaiton for the updated product" do
-        product_response = json_response
+        product_response = json_response[:product]
         expect(product_response[:title]).to eq "An expensive TV"
       end
 
