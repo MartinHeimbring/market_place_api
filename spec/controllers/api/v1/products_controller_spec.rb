@@ -3,6 +3,7 @@ require 'rails_helper'
 describe Api::V1::ProductsController do
   describe "GET #show" do
     before(:each) do
+      FactoryGirl.create :user
       @product = FactoryGirl.create :product
       get :show, id: @product.id
     end
@@ -13,10 +14,17 @@ describe Api::V1::ProductsController do
     end
 
     it { should respond_with 200}
+
+    it "has the user as an embeded object" do
+      product_response = json_response[:product]
+      p product_response
+      expect(product_response[:user][:email]).to eq @product.user.email
+    end
   end
 
   describe "GET #index" do
     before(:each) do
+      FactoryGirl.create :user
       4.times { FactoryGirl.create :product }
       get :index
     end
@@ -27,6 +35,13 @@ describe Api::V1::ProductsController do
     end
 
     it { should respond_with 200 }
+
+    it "returns the user object into each product" do
+      products_response = json_response[:products]
+      products_response.each do |product_response|
+        expect(product_response[:user]).to be_present
+      end
+    end
   end
 
   describe "POST #create" do
