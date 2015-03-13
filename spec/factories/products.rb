@@ -4,5 +4,6 @@ FactoryGirl.define do
     price { rand() * 100 }
     published false
     user_id "1"
+    quantity 0
   end
 end
