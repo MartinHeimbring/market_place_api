@@ -6,6 +6,7 @@ class Order < ActiveRecord::Base
   before_validation :set_total!
 
   validates :user_id, presence: true
+  validates_with EnoughProductsValidator
 
   def set_total!
     self.total = products.map(&:price).sum
