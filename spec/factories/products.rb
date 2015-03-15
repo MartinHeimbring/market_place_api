@@ -3,7 +3,7 @@ FactoryGirl.define do
     title { Faker::Product.product_name }
     price { rand() * 100 }
     published false
-    user_id "1"
-    quantity 0
+    quantity 5
+    user
   end
 end
